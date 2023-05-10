@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'basic/text_view.dart';
+import 'text_view.dart';
 
 class EmptyDataView extends StatelessWidget {
   final String? emptyTitle;

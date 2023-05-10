@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../styles/styles.dart';
+import '../styles/text_style.dart';
 
 class VNMText extends Text {
   VNMText(String? data,
@@ -135,6 +135,14 @@ class VNMText extends Text {
           overflow: overflow,
           style: VNMTextStyle.sBold18());
 
+  factory VNMText.sBold36(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.sBold36().copyWith(letterSpacing: 1.2));
+
   factory VNMText.sBold24(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
       VNMText(data ?? "",
@@ -182,6 +190,14 @@ class VNMText extends Text {
           maxLines: maxLines,
           overflow: overflow,
           style: VNMTextStyle.whiteBold14());
+
+  factory VNMText.whiteBold20(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.whiteBold20());
 
   factory VNMText.whiteBold22(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
@@ -240,12 +256,15 @@ class VNMText extends Text {
           style: VNMTextStyle.primaryMedium16());
 
   factory VNMText.hint14(String? data,
-          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+          {TextAlign? textAlign,
+          int? maxLines,
+          TextOverflow? overflow,
+          double? height}) =>
       VNMText(data ?? "",
           textAlign: textAlign,
           maxLines: maxLines,
           overflow: overflow,
-          style: VNMTextStyle.hint14());
+          style: VNMTextStyle.hint14().copyWith(height: height));
 
   factory VNMText.hint16(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../styles/styles.dart';
+import '../styles/color.dart';
 
 class VNMScaffold extends Scaffold {
   VNMScaffold(
@@ -10,6 +10,7 @@ class VNMScaffold extends Scaffold {
       super.bottomNavigationBar,
       super.floatingActionButton,
       super.floatingActionButtonLocation,
+      super.extendBody,
       super.appBar});
 
   factory VNMScaffold.primary(
@@ -27,12 +28,16 @@ class VNMScaffold extends Scaffold {
   factory VNMScaffold.white(
       {Widget? body,
       Widget? bottomNavigationBar,
-      PreferredSizeWidget? appBar}) {
+      PreferredSizeWidget? appBar,
+      Widget? floatingActionButton,
+      FloatingActionButtonLocation? floatingActionButtonLocation}) {
     return VNMScaffold(
       backgroundColor: VNMColor.white(),
       body: body,
       appBar: appBar,
       bottomNavigationBar: bottomNavigationBar,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
     );
   }
 

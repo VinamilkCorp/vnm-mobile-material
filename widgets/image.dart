@@ -4,8 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../core/core.dart';
-import '../../styles/styles.dart';
+import '../../core/exception/index.dart';
+import '../../core/global/logger.dart';
+import '../../extension/widget.dart';
+import '../styles/color.dart';
 
 class VNMImage extends StatelessWidget {
   final String path;
@@ -100,13 +102,13 @@ class VNMImage extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         return SizedBox(height: layout.maxHeight, width: layout.maxWidth)
-            .shimmer;
+            .withShimmer();
       }),
     );
   }
 
   Widget _imageNetworkError(BuildContext context, String url, error) {
-    if (!(error is EmptyImageException)) print(error);
+    if (!(error is EmptyImageException)) VNMLogger().error(error);
     Widget image = SizedBox();
     if (errorImage != null)
       image = errorImage!.endsWith("svg")
@@ -147,5 +149,3 @@ class VNMImage extends StatelessWidget {
     return Opacity(opacity: hideError == true ? 0 : 1, child: image);
   }
 }
-
-class EmptyImageException implements Exception {}

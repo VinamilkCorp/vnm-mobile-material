@@ -3,8 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../core/core.dart';
-import 'basic/basic.dart';
+import '../../../core/env.dart';
+import '../../../extension/state.dart';
+import '../text_view.dart';
 
 class PhoneNumberInput extends StatefulWidget {
   final TextEditingController controller;
@@ -28,14 +29,12 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
     widget.controller.text = VNPhoneFormatter().format(widget.controller.text);
   }
 
-  String get VN_COUNTRY_CODE => "84";
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        VNMText(locale.phoneNumberInputLabel),
+        VNMText(locale.phone_number),
         Stack(
           alignment: Alignment.centerLeft,
           children: [
@@ -55,7 +54,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                         package: 'country_icons', height: 20),
                     Padding(
                         padding: EdgeInsets.symmetric(horizontal: 6),
-                        child: VNMText('+$VN_COUNTRY_CODE'))
+                        child: VNMText('+${Env().VN_COUNTRY_CODE}'))
                   ])),
             ),
           ],
@@ -67,12 +66,12 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
   String? _validate(String? value) {
     if (!widget.enabled) return null;
     var unformatted = (value ?? '').replaceAll(" ", "");
-    if (unformatted.isEmpty) return locale.common_validate_required_field;
+    if (unformatted.isEmpty) return locale.validate_required_field;
     if (!validRegExp.hasMatch(unformatted)) {
-      return locale.requireValidPhoneInput;
+      return locale.phone_number_invalid;
     }
     return null;
-    // return LocalizationUtil.getAppLocalizations().requireValidPhoneInput;
+    // return  Localization().locale.phone_number_invalid;
   }
 }
 

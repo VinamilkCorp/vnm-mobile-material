@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
 
 typedef C = VNMColor;
+typedef CC = VNMColorConfig;
+
+class VNMColorConfig {
+  //custom colors
+  Color? primary;
+  Color? accent;
+
+  static VNMColorConfig _i = VNMColorConfig._();
+
+  VNMColorConfig._();
+
+  factory VNMColorConfig() => _i;
+
+  void config({Color? primary, Color? accent}) {
+    this.primary = primary;
+    this.accent = accent;
+  }
+}
 
 class VNMColor extends Color {
   VNMColor(super.value);
 
-  factory VNMColor.primary() => C(0xFF15215D);
+  factory VNMColor.primary() => C(CC().primary?.value ?? 0xFF15215D);
 
-  factory VNMColor.accent() => C(0xFF15215D);
+  factory VNMColor.accent() => C(CC().accent?.value ?? 0xFF15215D);
 
   factory VNMColor.background() => C(0xffF5F5F5);
 

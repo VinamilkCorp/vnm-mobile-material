@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../styles/styles.dart';
+import '../styles/app_bar_theme.dart';
+import '../styles/color.dart';
 import 'text_view.dart';
 
 class VNMAppBar extends AppBar {
@@ -51,11 +52,12 @@ class VNMAppBar extends AppBar {
         leading: CloseButton(color: color),
       );
 
-  factory VNMAppBar.empty() => VNMAppBar(
+  factory VNMAppBar.empty({Widget? leading}) => VNMAppBar(
         text: null,
         backgroundColor: VNMAppBarTheme.transparent().backgroundColor,
         titleTextStyle: VNMAppBarTheme.transparent().titleTextStyle,
         iconTheme: VNMAppBarTheme.transparent().iconTheme,
         elevation: 0,
+        leading: leading,
       );
 }

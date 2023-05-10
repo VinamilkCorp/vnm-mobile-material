@@ -47,6 +47,8 @@ class VNMTextStyle extends TextStyle {
 
   factory VNMTextStyle.sBold18() => VTS._sBold()._copy(size: 18);
 
+  factory VNMTextStyle.sBold36() => VTS._sBold()._copy(size: 36);
+
   factory VNMTextStyle.sBold20() => VTS._sBold()._copy(size: 20);
 
   factory VNMTextStyle.sBold22() => VTS._sBold()._copy(size: 22);
@@ -144,6 +146,8 @@ class VNMTextStyle extends TextStyle {
   factory VNMTextStyle.whiteBold16() => VTS._whBold()._copy(size: 16);
 
   factory VNMTextStyle.whiteBold18() => VTS._whBold()._copy(size: 18);
+
+  factory VNMTextStyle.whiteBold20() => VTS._whBold()._copy(size: 20);
 
   factory VNMTextStyle.whiteBold22() => VTS._whBold()._copy(size: 22);
 

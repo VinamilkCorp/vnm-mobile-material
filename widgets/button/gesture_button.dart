@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'raw_button.dart';
+import 'button.dart';
 
 class VNMGestureButton extends ButtonTracking {
   final Widget child;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/core.dart';
+import '../../../extension/widget.dart';
 import 'future_refresh_view.dart';
 
 class FutureRefreshListView<T> extends StatelessWidget {
@@ -63,7 +63,7 @@ class FutureRefreshListView<T> extends StatelessWidget {
                     shrinkWrap: shrinkWrap ?? false,
                     itemBuilder: (context, index) =>
                         itemBuilder(context, index, loadingItems![index])
-                            .shimmer,
+                            .withShimmer(),
                     separatorBuilder: (context, index) =>
                         separatorBuilder == null
                             ? SizedBox()

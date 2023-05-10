@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/core.dart';
-import '../../../styles/styles.dart';
+import '../../../core/global/tracking.dart';
+import '../../styles/button.dart';
+import '../../styles/text_style.dart';
 import '../text_view.dart';
 
 enum ColorButton { primary, warning, transparent, white, join, spin, spinAll }
@@ -34,6 +35,7 @@ class VNMButton extends ButtonTracking {
   final bool rounded;
   final String subLabel;
   final EdgeInsets? margin;
+  final EdgeInsets? padding;
 
   const VNMButton(
       {required super.label,
@@ -42,6 +44,7 @@ class VNMButton extends ButtonTracking {
       ColorButton? type,
       String? subLabel,
       this.margin,
+      this.padding,
       bool? rounded,
       bool? inBottom})
       : this.type = type ?? ColorButton.primary,
@@ -112,22 +115,25 @@ class VNMButton extends ButtonTracking {
   }
 
   factory VNMButton.spin(String label,
-      {Function()? onPressed, String? subLabel}) {
+      {Function()? onPressed, String? subLabel, EdgeInsets? padding}) {
     return VNMButton(
       label: label,
       margin: EdgeInsets.zero,
+      padding: padding,
       type: ColorButton.spin,
       onPressed: onPressed,
       subLabel: subLabel,
     );
   }
 
-  factory VNMButton.spinTransparent(String label, {Function()? onPressed}) {
+  factory VNMButton.spinTransparent(String label,
+      {EdgeInsets? padding, Function()? onPressed}) {
     return VNMButton(
       label: label,
       margin: EdgeInsets.zero,
       type: ColorButton.spinAll,
       onPressed: onPressed,
+      padding: padding,
     );
   }
 
@@ -140,22 +146,30 @@ class VNMButton extends ButtonTracking {
       style = style.copyWith(
           shape: MaterialStatePropertyAll(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))));
-    return SafeArea(
-        bottom: inBottom && rounded,
-        top: false,
-        child: Padding(
-          padding: margin == null ? EdgeInsets.all(rounded ? 16 : 0) : margin!,
-          child: TextButton(
-              onPressed: onPressed == null ? null : onPressedWithTracking,
-              style: style,
-              child: SafeArea(
-                  bottom: inBottom && !rounded,
-                  top: false,
-                  child: _buildButton())),
-        ));
+    var viewInsets = EdgeInsets.zero;
+    if (inBottom)
+      viewInsets +=
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom);
+    return Padding(
+      padding: viewInsets,
+      child: SafeArea(
+          bottom: inBottom && rounded,
+          top: false,
+          child: Padding(
+            padding:
+                margin == null ? EdgeInsets.all(rounded ? 16 : 0) : margin!,
+            child: TextButton(
+                onPressed: onPressed == null ? null : onPressedWithTracking,
+                style: style,
+                child: SafeArea(
+                    bottom: inBottom && !rounded,
+                    top: false,
+                    child: _buildButton(context))),
+          )),
+    );
   }
 
-  _buildButton() {
+  _buildButton(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -163,32 +177,37 @@ class VNMButton extends ButtonTracking {
             ? Flexible(
                 child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 28),
-                child: _buildContent(),
+                child: _buildContent(context),
               ))
-            : Expanded(child: _buildContent())
+            : Expanded(child: _buildContent(context))
       ],
     );
   }
 
-  _buildContent() {
+  _buildContent(BuildContext context) {
     var style = onPressed == null ? VNMTextStyle.btnWhite() : type.textStyle;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        VNMText(
-          label,
-          style: style,
-          textAlign: TextAlign.center,
-        ),
-        if (subLabel.isNotEmpty) ...[
-          SizedBox(height: 2),
+    var padding = EdgeInsets.zero;
+    if (this.padding != null) padding += this.padding!;
+    return Padding(
+      padding: padding,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
           VNMText(
-            subLabel,
-            style: style.copyWith(fontWeight: FontWeight.w900),
+            label,
+            style: style,
             textAlign: TextAlign.center,
-          )
-        ]
-      ],
+          ),
+          if (subLabel.isNotEmpty) ...[
+            SizedBox(height: 2),
+            VNMText(
+              subLabel,
+              style: style.copyWith(fontWeight: FontWeight.w400),
+              textAlign: TextAlign.center,
+            )
+          ]
+        ],
+      ),
     );
   }
 }
@@ -201,8 +220,10 @@ abstract class ButtonTracking extends StatelessWidget {
 
   void onPressedWithTracking() {
     //route
+    FocusManager.instance.primaryFocus?.unfocus();
     if (onPressed == null) return;
-    if (label != null) Analytics().logButton(label!);
+    if (label != null && VNMTrackingConfig().logButton != null)
+      VNMTrackingConfig().logButton!(label!);
     onPressed!();
   }
 }

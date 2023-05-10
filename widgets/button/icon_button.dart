@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../styles/styles.dart';
-import 'raw_button.dart';
+import '../../styles/color.dart';
+import 'button.dart';
 
 class VNMIconButton extends ButtonTracking {
   final IconData icon;

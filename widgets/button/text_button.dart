@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../styles/styles.dart';
+import '../../styles/button.dart';
+import '../../styles/text_style.dart';
 import '../text_view.dart';
-import 'raw_button.dart';
-
+import 'button.dart';
+ 
 enum VNMTextButtonType { _default, hint, white }
 
 extension _VNMTextButtonType on VNMTextButtonType {
@@ -40,6 +41,6 @@ class VNMTextButton extends ButtonTracking {
         onPressed: onPressed == null ? null : onPressedWithTracking,
         style: VNMButtonStyle.text(),
         child: VNMText(label,
-            style: onPressed == null ? VNMTextStyle.disable14() : type.style));
+            style: onPressed == null ? VNMTextStyle.subTitle14() : type.style));
   }
 }
