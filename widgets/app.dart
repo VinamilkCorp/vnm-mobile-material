@@ -8,6 +8,7 @@ import '../../core/global/localization.dart';
 import '../../core/global/navigator.dart';
 import '../../core/global/network.dart';
 import '../../core/global/route.dart';
+import '../../extension/change_notifier.dart';
 import '../styles/color.dart';
 import '../styles/theme_data.dart';
 import 'image.dart';
@@ -38,17 +39,29 @@ class VinamilkAppState extends State<VinamilkApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: widget.title,
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: const [
-        Locale('vi', 'VN'),
-        Locale('en', 'US'),
+    return MultiProvider(
+      providers: [
+        LoadingNotifier().create<LoadingNotifier>(),
+        NetworkNotifier().create<NetworkNotifier>(),
+        AuthNotifier().create<AuthNotifier>(),
       ],
-      localeListResolutionCallback: onLocaleListResolutionCallback,
-      theme: VNMThemeData().root,
-      builder: appBuilder,
+      builder: (context, child) {
+        Loader().init(context);
+        Network().init(context);
+        Auth().init(context);
+        return MaterialApp(
+          title: widget.title,
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: const [
+            Locale('vi', 'VN'),
+            Locale('en', 'US'),
+          ],
+          localeListResolutionCallback: onLocaleListResolutionCallback,
+          theme: VNMThemeData().root,
+          builder: appBuilder,
+        );
+      },
     );
   }
 

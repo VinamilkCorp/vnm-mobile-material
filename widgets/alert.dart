@@ -87,8 +87,8 @@ class Alert {
         context: VNMNavigator().context,
         actions: (actions ?? []).map((it) {
           if (it.style == AlertStyle.ok) {
-            return VNMTextButton(
-              label: it.title,
+            return VNMTextButton.primary(
+              it.title,
               onPressed: () async {
                 VNMNavigator().pop();
                 if (it.onTap != null) it.onTap!();
