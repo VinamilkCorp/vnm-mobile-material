@@ -12,7 +12,7 @@ class StreamRefreshView<T> extends StatefulWidget {
   final Stream<T?> Function() stream;
   final Color? backgroundColor;
   final Color? indicatorColor;
-  final Widget Function(BuildContext context)? headerBuilder;
+  final Widget Function(BuildContext context, T? data)? headerBuilder;
   final Widget Function(BuildContext context, T data) builder;
   final Widget Function(BuildContext context)? loadingBuilder;
 
@@ -101,7 +101,7 @@ class _StreamRefreshViewState<T> extends State<StreamRefreshView<T>> {
 
     return Column(
       children: [
-        if (widget.headerBuilder != null) widget.headerBuilder!(context),
+        if (widget.headerBuilder != null) widget.headerBuilder!(context, data),
         Expanded(
             child: RefreshIndicator(
           onRefresh: () async => refresher.change(),
