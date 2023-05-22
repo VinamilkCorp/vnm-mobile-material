@@ -55,7 +55,7 @@ class VNMColor extends Color {
 
   factory VNMColor.divide() => C(0xffF2F2F7);
 
-  factory VNMColor.fortuneBackground() => C(0xff1E2540);
+  factory VNMColor.fortuneBackground() => C(0xff15215D);
 
   factory VNMColor.placeholder() => C(0xffF3F9FD);
 
@@ -63,7 +63,7 @@ class VNMColor extends Color {
 
   factory VNMColor.message() => C(0xff667085);
 
-  factory VNMColor.fortuneWheelBorder() => C(0xff2A304E);
+  factory VNMColor.fortuneWheelBorder() => C(0xff1F2D70);
 
   factory VNMColor.fortuneShadow() => C(C(0xff1E2540).withOpacity(0.12).value);
 

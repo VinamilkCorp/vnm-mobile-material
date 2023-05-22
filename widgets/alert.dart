@@ -82,6 +82,7 @@ class Alert {
     await Dialogs.materialDialog(
         title: title,
         msg: message,
+        msgAlign: TextAlign.center,
         color: Colors.white,
         barrierDismissible: false,
         context: VNMNavigator().context,
