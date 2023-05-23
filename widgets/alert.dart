@@ -46,6 +46,7 @@ class Alert {
   final String? title;
   final String? message;
   final List<AlertAction>? actions;
+  static bool _isShow = false;
 
   Alert._({this.title, this.message, this.actions});
 
@@ -79,6 +80,8 @@ class Alert {
   }
 
   Future<void> show() async {
+    if (_isShow) return;
+    _isShow = true;
     await Dialogs.materialDialog(
         title: title,
         msg: message,
@@ -105,5 +108,6 @@ class Alert {
             );
           }
         }).toList());
+    _isShow = false;
   }
 }
