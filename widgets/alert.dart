@@ -99,7 +99,7 @@ class Alert {
               },
             );
           } else {
-            return VNMTextButton.hint(
+            return VNMTextButton.cancel(
               it.title,
               onPressed: () async {
                 VNMNavigator().pop();

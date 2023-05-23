@@ -192,6 +192,9 @@ class VNMTextStyle extends TextStyle {
   //customize
   factory VNMTextStyle.title() => VTS._s()._copy(size: 16, weight: FW.w600);
 
+  factory VNMTextStyle.cancel() => VTS._s()._copy(
+      size: 14, weight: FW.w500, color: VNMColor.text().withOpacity(0.8));
+
   VNMTextStyle _copy({
     Color? color,
     double? size,
