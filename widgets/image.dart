@@ -18,6 +18,7 @@ class VNMImage extends StatelessWidget {
   final String? errorImage;
   final bool? hideError;
   final bool? hidePlaceHolder;
+  final Color? backgroundColor;
 
   const VNMImage(this.path,
       {super.key,
@@ -27,6 +28,7 @@ class VNMImage extends StatelessWidget {
       this.radius,
       this.errorImage,
       this.hideError,
+      this.backgroundColor,
       this.hidePlaceHolder});
 
   bool get _fromNetwork => !path.startsWith("assets/");
@@ -43,7 +45,10 @@ class VNMImage extends StatelessWidget {
 
   Widget _borderedImage(Widget image) {
     return ClipRRect(
-      child: image,
+      child: Container(
+        color: backgroundColor,
+        child: image,
+      ),
       borderRadius: BorderRadius.circular(radius ?? 0),
     );
   }
