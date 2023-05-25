@@ -10,9 +10,13 @@ import 'package:vinamilk_b2b/vnm/material/widgets/scaffold.dart';
 class CustomHeaderView extends StatefulWidget {
   final PreferredSizeWidget? appBar;
   final List<Widget> Function(TickNotifier value) childrenBuilder;
+  final Widget Function(BuildContext context, int index)? separatorBuilder;
 
   const CustomHeaderView(
-      {super.key, this.appBar, required this.childrenBuilder});
+      {super.key,
+      this.appBar,
+      required this.childrenBuilder,
+      this.separatorBuilder});
 
   @override
   State<StatefulWidget> createState() => _CustomHeaderState();
@@ -66,15 +70,18 @@ class _CustomHeaderState extends State<CustomHeaderView> {
                           child: Consumer<TickNotifier>(
                             builder: (context, tick, _) {
                               List<Widget> children =
-                              widget.childrenBuilder(tick);
+                                  widget.childrenBuilder(tick);
                               return ListView.separated(
                                 controller: scroller,
                                 padding: EdgeInsets.only(bottom: 20),
                                 itemCount: children.length,
                                 physics: AlwaysScrollableScrollPhysics(),
                                 itemBuilder: (_, index) => children[index],
-                                separatorBuilder: (_, __) =>
-                                    SizedBox(height: 24),
+                                separatorBuilder: (context, index) => widget
+                                            .separatorBuilder ==
+                                        null
+                                    ? SizedBox()
+                                    : widget.separatorBuilder!(context, index),
                               );
                             },
                           ),
@@ -139,6 +146,6 @@ class _HeaderCustomPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _HeaderCustomPainter oldDelegate) =>
       oldDelegate.offset != offset ||
-          oldDelegate.boxSize != boxSize ||
-          oldDelegate.bounce != bounce;
+      oldDelegate.boxSize != boxSize ||
+      oldDelegate.bounce != bounce;
 }

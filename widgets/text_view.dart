@@ -103,6 +103,14 @@ class VNMText extends Text {
           overflow: overflow,
           style: VNMTextStyle.s14());
 
+  factory VNMText.white(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.white14());
+
   factory VNMText.s16(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
       VNMText(data ?? "",
@@ -190,6 +198,14 @@ class VNMText extends Text {
           maxLines: maxLines,
           overflow: overflow,
           style: VNMTextStyle.whiteBold14());
+
+  factory VNMText.whiteBold18(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.whiteBold18());
 
   factory VNMText.whiteBold20(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>

@@ -12,13 +12,14 @@ class VNMAppBar extends AppBar {
       super.iconTheme,
       super.leading,
       super.actions,
-      super.elevation})
+      super.elevation,
+      super.flexibleSpace})
       : super(
           title: text == null ? null : VNMText(text),
         );
 
   factory VNMAppBar.primary(String? text,
-          {List<Widget>? actions, double? elevation}) =>
+          {List<Widget>? actions, double? elevation, Widget? flexibleSpace}) =>
       VNMAppBar(
         text: text,
         backgroundColor: VNMAppBarTheme.primary().backgroundColor,
@@ -26,6 +27,7 @@ class VNMAppBar extends AppBar {
         iconTheme: VNMAppBarTheme.primary().iconTheme,
         actions: actions,
         elevation: elevation,
+        flexibleSpace: flexibleSpace,
       );
 
   factory VNMAppBar.transparent(String? text, {VNMColor? textColor}) =>
