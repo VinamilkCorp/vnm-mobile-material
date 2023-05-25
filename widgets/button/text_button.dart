@@ -5,7 +5,7 @@ import '../../styles/text_style.dart';
 import '../text_view.dart';
 import 'button.dart';
 
-enum VNMTextButtonType { _default, hint, white, primary, cancel }
+enum VNMTextButtonType { _default, hint, white, primary, cancel, interactive }
 
 extension _VNMTextButtonType on VNMTextButtonType {
   TextStyle get style => [
@@ -14,6 +14,7 @@ extension _VNMTextButtonType on VNMTextButtonType {
         VNMTextStyle.whiteBold14(),
         VNMTextStyle.primaryBold14(),
         VNMTextStyle.cancel(),
+        VNMTextStyle.interactive(),
       ][index];
 }
 
@@ -40,6 +41,14 @@ class VNMTextButton extends ButtonTracking {
   factory VNMTextButton.primary(String label, {void Function()? onPressed}) {
     return VNMTextButton(
         label: label, onPressed: onPressed, type: VNMTextButtonType.primary);
+  }
+
+  factory VNMTextButton.interactive(String label,
+      {void Function()? onPressed}) {
+    return VNMTextButton(
+        label: label,
+        onPressed: onPressed,
+        type: VNMTextButtonType.interactive);
   }
 
   factory VNMTextButton.cancel(String label, {void Function()? onPressed}) {

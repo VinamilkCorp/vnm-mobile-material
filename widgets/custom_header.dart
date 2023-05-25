@@ -9,7 +9,7 @@ import 'package:vinamilk_b2b/vnm/material/widgets/scaffold.dart';
 
 class CustomHeaderView extends StatefulWidget {
   final PreferredSizeWidget? appBar;
-  final List<Widget> Function(TickNotifier value) childrenBuilder;
+  final List<Widget> Function() childrenBuilder;
   final Widget Function(BuildContext context, int index)? separatorBuilder;
 
   const CustomHeaderView(
@@ -69,19 +69,24 @@ class _CustomHeaderState extends State<CustomHeaderView> {
                           height: box.maxHeight,
                           child: Consumer<TickNotifier>(
                             builder: (context, tick, _) {
-                              List<Widget> children =
-                                  widget.childrenBuilder(tick);
-                              return ListView.separated(
+                              List<Widget> children = widget.childrenBuilder();
+                              return SingleChildScrollView(
                                 controller: scroller,
                                 padding: EdgeInsets.only(bottom: 20),
-                                itemCount: children.length,
                                 physics: AlwaysScrollableScrollPhysics(),
-                                itemBuilder: (_, index) => children[index],
-                                separatorBuilder: (context, index) => widget
-                                            .separatorBuilder ==
-                                        null
-                                    ? SizedBox()
-                                    : widget.separatorBuilder!(context, index),
+                                child: ListView.separated(
+                                  primary: false,
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.zero,
+                                  itemCount: children.length,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemBuilder: (_, index) => children[index],
+                                  separatorBuilder: (context, index) =>
+                                      widget.separatorBuilder == null
+                                          ? SizedBox()
+                                          : widget.separatorBuilder!(
+                                              context, index),
+                                ),
                               );
                             },
                           ),

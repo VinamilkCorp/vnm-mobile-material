@@ -7,7 +7,12 @@ typedef FW = FontWeight;
 typedef VTS = VNMTextStyle;
 
 class VNMTextStyle extends TextStyle {
-  VNMTextStyle({super.color, super.fontSize, super.fontWeight, super.height});
+  VNMTextStyle(
+      {super.color,
+      super.fontSize,
+      super.fontWeight,
+      super.height,
+      super.decoration});
 
   factory VNMTextStyle._root() =>
       VNMTextStyle(color: VNMColor.text(), fontSize: 14, fontWeight: FW.w400);
@@ -105,6 +110,9 @@ class VNMTextStyle extends TextStyle {
 
   factory VNMTextStyle.hint16() => VTS._ht()._copy(size: 16);
 
+  factory VNMTextStyle.hintLineThrough16() =>
+      VTS.hint16()._copy(decoration: TextDecoration.lineThrough);
+
   factory VNMTextStyle._htBold() => VTS._ht()._copy(weight: FW.w600);
 
   factory VNMTextStyle.hintBold14() => VTS._htBold();
@@ -183,6 +191,8 @@ class VNMTextStyle extends TextStyle {
 
   factory VNMTextStyle.interactive12() => VTS._itr()._copy(size: 12);
 
+  factory VNMTextStyle.interactive() => VTS._itr()._copy(size: 14);
+
   factory VNMTextStyle._itrBold() => VTS._itr()._copy(weight: FW.w600);
 
   factory VNMTextStyle.interactiveBold12() => VTS._itrBold()._copy(size: 12);
@@ -195,17 +205,22 @@ class VNMTextStyle extends TextStyle {
   factory VNMTextStyle.cancel() => VTS._s()._copy(
       size: 14, weight: FW.w500, color: VNMColor.text().withOpacity(0.8));
 
+  factory VNMTextStyle.pinkBold18() =>
+      VTS._s()._copy(size: 18, weight: FW.w600, color: VNMColor.pink());
+
   VNMTextStyle _copy({
     Color? color,
     double? size,
     FontWeight? weight,
     double? height,
+    TextDecoration? decoration,
   }) {
     return VNMTextStyle(
       color: color ?? this.color,
       fontSize: size ?? this.fontSize,
       fontWeight: weight ?? this.fontWeight,
       height: height ?? this.height,
+      decoration: decoration ?? this.decoration,
     );
   }
 }

@@ -15,6 +15,14 @@ class VNMText extends Text {
           overflow: overflow,
           style: VNMTextStyle.error14());
 
+  factory VNMText.pinkBold18(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.pinkBold18());
+
   factory VNMText.error16(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
       VNMText(data ?? "",
@@ -159,6 +167,14 @@ class VNMText extends Text {
           overflow: overflow,
           style: VNMTextStyle.sBold24());
 
+  factory VNMText.interactive(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.interactive());
+
   factory VNMText.interactiveBold12(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
       VNMText(data ?? "",
@@ -198,6 +214,14 @@ class VNMText extends Text {
           maxLines: maxLines,
           overflow: overflow,
           style: VNMTextStyle.whiteBold14());
+
+  factory VNMText.whiteBold16(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.whiteBold16());
 
   factory VNMText.whiteBold18(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
@@ -289,4 +313,12 @@ class VNMText extends Text {
           maxLines: maxLines,
           overflow: overflow,
           style: VNMTextStyle.hint16());
+
+  factory VNMText.hintLineThrough16(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.hintLineThrough16());
 }

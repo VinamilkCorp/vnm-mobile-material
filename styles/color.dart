@@ -75,6 +75,10 @@ class VNMColor extends Color {
 
   factory VNMColor.shadow() => C(C(0x1F1C1C14).value);
 
+  factory VNMColor.pink() => C(C(0xffFF2876).value);
+
+  factory VNMColor.border() => C(C(0xffE5E5EA).value);
+
   MaterialColor get material => MaterialColor(VNMColor.primary().value, {
         50: Color.fromRGBO(VNMColor.primary().red, VNMColor.primary().green,
             VNMColor.primary().blue, .1),
