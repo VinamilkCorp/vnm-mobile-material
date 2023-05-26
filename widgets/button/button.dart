@@ -5,7 +5,16 @@ import '../../styles/button.dart';
 import '../../styles/text_style.dart';
 import '../text_view.dart';
 
-enum ColorButton { primary, warning, transparent, white, join, spin, spinAll }
+enum ColorButton {
+  primary,
+  warning,
+  transparent,
+  white,
+  join,
+  spin,
+  spinAll,
+  disable
+}
 
 extension _ColorButton on ColorButton {
   TextStyle get textStyle => [
@@ -16,6 +25,7 @@ extension _ColorButton on ColorButton {
         VNMTextStyle.btnWhite(),
         VNMTextStyle.btnPrimary(),
         VNMTextStyle.btnWhite(),
+        VNMTextStyle.btnDisable(),
       ][index];
 
   ButtonStyle get buttonStyle => [
@@ -26,6 +36,7 @@ extension _ColorButton on ColorButton {
         VNMButtonStyle.join(),
         VNMButtonStyle.spin(),
         VNMButtonStyle.spinTransparent(),
+        VNMButtonStyle.disable(),
       ][index];
 }
 
@@ -52,8 +63,14 @@ class VNMButton extends ButtonTracking {
         this.rounded = rounded ?? false,
         this.subLabel = subLabel ?? '';
 
-  factory VNMButton.bottom(String label, {Function()? onPressed}) {
-    return VNMButton(label: label, onPressed: onPressed, inBottom: true);
+  factory VNMButton.bottom(String label,
+      {Function()? onPressed, bool? rounded, EdgeInsets? margin}) {
+    return VNMButton(
+        label: label,
+        onPressed: onPressed,
+        rounded: rounded,
+        margin: margin,
+        inBottom: true);
   }
 
   factory VNMButton.bottomWarning(String label, {Function()? onPressed}) {
@@ -64,17 +81,32 @@ class VNMButton extends ButtonTracking {
         inBottom: true);
   }
 
-  factory VNMButton.bottomTransparent(String label, {Function()? onPressed}) {
+  factory VNMButton.bottomDisable(String label,
+      {Function()? onPressed, bool? rounded, EdgeInsets? margin}) {
     return VNMButton(
         label: label,
+        rounded: rounded,
+        type: ColorButton.disable,
+        onPressed: onPressed,
+        margin: margin,
+        inBottom: true);
+  }
+
+  factory VNMButton.bottomTransparent(String label,
+      {Function()? onPressed, bool? rounded}) {
+    return VNMButton(
+        label: label,
+        rounded: rounded,
         type: ColorButton.transparent,
         onPressed: onPressed,
         inBottom: true);
   }
 
-  factory VNMButton.bottomWhite(String label, {Function()? onPressed}) {
+  factory VNMButton.bottomWhite(String label,
+      {Function()? onPressed, bool? rounded}) {
     return VNMButton(
         label: label,
+        rounded: rounded,
         type: ColorButton.white,
         onPressed: onPressed,
         inBottom: true);
