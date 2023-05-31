@@ -82,6 +82,9 @@ class Alert {
   Future<void> show() async {
     if (_isShow) return;
     _isShow = true;
+    Future.delayed(Duration(seconds: 5)).then((_) {
+      _isShow = false;
+    });
     await Dialogs.materialDialog(
         title: title,
         msg: message,
