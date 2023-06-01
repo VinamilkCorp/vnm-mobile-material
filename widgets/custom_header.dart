@@ -11,29 +11,36 @@ class CustomHeaderView extends StatefulWidget {
   final PreferredSizeWidget? appBar;
   final List<Widget> Function() childrenBuilder;
   final Widget Function(BuildContext context, int index)? separatorBuilder;
+  final double? paddingTop;
+  final ScrollController? controller;
 
   const CustomHeaderView(
       {super.key,
       this.appBar,
       required this.childrenBuilder,
-      this.separatorBuilder});
+      this.separatorBuilder,
+      this.paddingTop,
+      this.controller});
 
   @override
   State<StatefulWidget> createState() => _CustomHeaderState();
 }
 
 class _CustomHeaderState extends State<CustomHeaderView> {
+  late final Size sizeSticky;
+  late final Offset offsetSticky;
   final TickNotifier _tick = TickNotifier();
   final DoubleNotifier _bounce = DoubleNotifier();
-  final ScrollController scroller = ScrollController();
-  Offset offsetSticky = Offset(58.9, 115.0);
-  Size sizeSticky = Size(393.0, 93.0);
+  late final ScrollController scroller;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _bounce.value = 0;
+    scroller = widget.controller ?? ScrollController();
+    sizeSticky = Size(393.0, 93.0 + (widget.paddingTop ?? 0));
+    offsetSticky = Offset(58.9, 115.0 + (widget.paddingTop ?? 0));
     scroller.addListener(() {
       if (mounted) _bounce.setValue(-scroller.offset);
     });
@@ -72,7 +79,8 @@ class _CustomHeaderState extends State<CustomHeaderView> {
                               List<Widget> children = widget.childrenBuilder();
                               return SingleChildScrollView(
                                 controller: scroller,
-                                padding: EdgeInsets.only(bottom: 20),
+                                padding: EdgeInsets.only(
+                                    bottom: 20, top: widget.paddingTop ?? 0),
                                 physics: AlwaysScrollableScrollPhysics(),
                                 child: ListView.separated(
                                   primary: false,

@@ -175,6 +175,14 @@ class VNMText extends Text {
           overflow: overflow,
           style: VNMTextStyle.interactive());
 
+  factory VNMText.interactiveBold(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.interactiveBold());
+
   factory VNMText.interactiveBold12(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
       VNMText(data ?? "",
@@ -206,6 +214,14 @@ class VNMText extends Text {
           maxLines: maxLines,
           overflow: overflow,
           style: VNMTextStyle.primaryBold14());
+
+  factory VNMText.primaryBold18(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.primaryBold18());
 
   factory VNMText.whiteBold14(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
@@ -313,6 +329,14 @@ class VNMText extends Text {
           maxLines: maxLines,
           overflow: overflow,
           style: VNMTextStyle.hint16());
+
+  factory VNMText.hintBold12(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.hintBold12());
 
   factory VNMText.hintLineThrough16(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>

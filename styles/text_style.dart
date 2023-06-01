@@ -117,6 +117,8 @@ class VNMTextStyle extends TextStyle {
 
   factory VNMTextStyle._htBold() => VTS._ht()._copy(weight: FW.w600);
 
+  factory VNMTextStyle.hintBold12() => VTS._htBold()._copy(size: 12);
+
   factory VNMTextStyle.hintBold14() => VTS._htBold();
 
   //note
@@ -196,6 +198,8 @@ class VNMTextStyle extends TextStyle {
   factory VNMTextStyle.interactive() => VTS._itr()._copy(size: 14);
 
   factory VNMTextStyle._itrBold() => VTS._itr()._copy(weight: FW.w600);
+
+  factory VNMTextStyle.interactiveBold() => VTS._itrBold();
 
   factory VNMTextStyle.interactiveBold12() => VTS._itrBold()._copy(size: 12);
 

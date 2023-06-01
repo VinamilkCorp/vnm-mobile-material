@@ -19,6 +19,7 @@ class VNMImage extends StatelessWidget {
   final bool? hideError;
   final bool? hidePlaceHolder;
   final Color? backgroundColor;
+  final Color? color;
 
   const VNMImage(this.path,
       {super.key,
@@ -29,6 +30,7 @@ class VNMImage extends StatelessWidget {
       this.errorImage,
       this.hideError,
       this.backgroundColor,
+      this.color,
       this.hidePlaceHolder});
 
   bool get _fromNetwork => !path.startsWith("assets/");
@@ -36,6 +38,9 @@ class VNMImage extends StatelessWidget {
   bool get _isSVG => path.endsWith(".svg");
 
   BoxFit get _fit => fit ?? BoxFit.contain;
+
+  ColorFilter? get _color =>
+      color == null ? null : ColorFilter.mode(color!, BlendMode.srcATop);
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +75,23 @@ class VNMImage extends StatelessWidget {
   }
 
   Widget _svgNetwork() {
-    return SvgPicture.network(path, fit: _fit, height: height, width: width);
+    return SvgPicture.network(
+      path,
+      fit: _fit,
+      height: height,
+      width: width,
+      colorFilter: _color,
+    );
   }
 
   Widget _svgAsset() {
-    return SvgPicture.asset(path, fit: _fit, height: height, width: width);
+    return SvgPicture.asset(
+      path,
+      fit: _fit,
+      height: height,
+      width: width,
+      colorFilter: _color,
+    );
   }
 
   Widget _imageNetwork(BuildContext context) {
@@ -91,7 +108,13 @@ class VNMImage extends StatelessWidget {
   }
 
   Widget _imageAsset() {
-    return Image.asset(path, fit: _fit, height: height, width: width);
+    return Image.asset(
+      path,
+      fit: _fit,
+      height: height,
+      width: width,
+      color: color,
+    );
   }
 
   Widget _imageNetworkPlaceHolder(BuildContext context, String url) {
