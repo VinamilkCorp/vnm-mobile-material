@@ -22,10 +22,7 @@ class VinamilkApp extends StatefulWidget {
   final String title;
   final Function()? onInitState;
 
-  const VinamilkApp(
-      {super.key,
-      required this.title,
-      this.onInitState});
+  const VinamilkApp({super.key, required this.title, this.onInitState});
 
   @override
   State<StatefulWidget> createState() => VinamilkAppState();
