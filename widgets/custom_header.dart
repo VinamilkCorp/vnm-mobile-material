@@ -2,10 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vinamilk_b2b/vnm/core/notifiers.dart';
-import 'package:vinamilk_b2b/vnm/extension/change_notifier.dart';
-import 'package:vinamilk_b2b/vnm/material/styles/color.dart';
-import 'package:vinamilk_b2b/vnm/material/widgets/scaffold.dart';
+
+import '../../core/notifiers.dart';
+import '../../extension/change_notifier.dart';
+import '../../material/styles/color.dart';
+import '../../material/widgets/scaffold.dart';
 
 class CustomHeaderView extends StatefulWidget {
   final PreferredSizeWidget? appBar;

@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vinamilk_b2b/vnm/core/notifiers.dart';
-import 'package:vinamilk_b2b/vnm/extension/change_notifier.dart';
-import 'package:vinamilk_b2b/vnm/material/styles/color.dart';
-import 'package:vinamilk_b2b/vnm/material/styles/text_style.dart';
 
+import '../../core/notifiers.dart';
+import '../../extension/change_notifier.dart';
+import '../styles/color.dart';
+import '../styles/text_style.dart';
 import 'button/gesture_button.dart';
 import 'text_view.dart';
 

@@ -2,27 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/exception/exception.dart';
 import '../../core/global/auth.dart';
 import '../../core/global/loader.dart';
 import '../../core/global/localization.dart';
 import '../../core/global/navigator.dart';
 import '../../core/global/network.dart';
 import '../../core/global/route.dart';
+import '../../core/global/tracking.dart';
 import '../../extension/change_notifier.dart';
+import '../../extension/object.dart';
 import '../styles/color.dart';
 import '../styles/theme_data.dart';
 import 'image.dart';
+import 'scaffold.dart';
 import 'text_view.dart';
 
 class VinamilkApp extends StatefulWidget {
   final String title;
-  final Widget Function(AppRoute route, Object? args) routeBuilder;
   final Function()? onInitState;
 
   const VinamilkApp(
       {super.key,
       required this.title,
-      required this.routeBuilder,
       this.onInitState});
 
   @override
@@ -67,29 +69,29 @@ class VinamilkAppState extends State<VinamilkApp> {
 
   Widget appBuilder(BuildContext context, Widget? child) {
     Localization().initialize(context);
-    return FutureBuilder<AppRoute>(
-        future: _initialRoute(),
+    return FutureBuilder<void>(
+        future: _initialAuth(),
         builder: (context, snapshot) {
-          return snapshot.data == null
-              ? Container(
-                  padding: EdgeInsets.all(40),
-                  color: VNMColor.white(),
-                  child: VNMImage("assets/logo.png"),
-                )
-              : Builder(
+          return snapshot.connectionState == ConnectionState.done
+              ? Builder(
                   builder: (context) => MediaQuery(
                       data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
                       child: Stack(
                         children: [
                           Navigator(
                             key: VNMNavigator().key,
-                            initialRoute: snapshot.data!.name,
+                            initialRoute: "launch",
                             onGenerateRoute: onGenerateRoute,
                           ),
                           _buildNetwork(),
                           _buildLoading(),
                         ],
-                      )));
+                      )))
+              : Container(
+                  padding: EdgeInsets.all(40),
+                  color: VNMColor.white(),
+                  child: VNMImage("assets/logo.png"),
+                );
         });
   }
 
@@ -147,12 +149,39 @@ class VinamilkAppState extends State<VinamilkApp> {
     });
   }
 
-  Future<AppRoute> _initialRoute() async {
+  Future<void> _initialAuth() async {
     await Auth().initialized();
-    return Auth().getRoute();
   }
 
   Route? onGenerateRoute(RouteSettings settings) {
-    return settings.onGenerateRoute(context, widget.routeBuilder);
+    Loader().hide();
+    Widget page = VNMScaffold();
+    try {
+      String name = settings.name ?? "undefined";
+      Map? arguments = settings.arguments?.parse<Map>();
+      AppRouteBuilder? builder = arguments?["builder"];
+      dynamic args = arguments?["args"];
+      if (name == "launch") {
+        VNMAppRoute launch = Auth().getRoute();
+        builder = launch.builder;
+      }
+      if (builder != null) {
+        if (VNMTrackingConfig().logRoute != null) {
+          VNMTrackingConfig().logRoute!(name, args);
+        }
+        page = builder(args);
+      }
+    } catch (exception, stackTrace) {
+      VNMException().capture(exception, stackTrace);
+    }
+    return MaterialPageRoute(
+        builder: (_) => GestureDetector(
+              child: page,
+              onTap: () {
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
+              behavior: HitTestBehavior.translucent,
+            ),
+        settings: settings);
   }
 }
