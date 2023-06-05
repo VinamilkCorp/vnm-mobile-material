@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vinamilk_b2b/vnm/material/widgets/loading.dart';
 
 import '../../core/exception/index.dart';
 import '../../core/global/logger.dart';
@@ -127,7 +128,7 @@ class VNMImage extends StatelessWidget {
             alignment: Alignment.center,
             width: width,
             height: height,
-            child: CircularProgressIndicator(),
+            child: LoadingView(),
           );
         return SizedBox(height: layout.maxHeight, width: layout.maxWidth)
             .withShimmer();

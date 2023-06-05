@@ -205,6 +205,11 @@ class VNMTextStyle extends TextStyle {
 
   factory VNMTextStyle.interactiveBold16() => VTS._itrBold()._copy(size: 16);
 
+  //success
+  factory VNMTextStyle._scs() => VTS._s()._copy(color: VNMColor.success());
+
+  factory VNMTextStyle.success() => VTS._scs()._copy(size: 14);
+
   //customize
   factory VNMTextStyle.title() => VTS._s()._copy(size: 16, weight: FW.w600);
 

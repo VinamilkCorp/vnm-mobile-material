@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vinamilk_b2b/vnm/material/widgets/loading.dart';
 
 import '../../../core/notifiers.dart';
 import '../../../extension/change_notifier.dart';
@@ -71,11 +72,7 @@ class _FutureRefreshViewState<T> extends State<FutureRefreshView<T>> {
   }
 
   Widget _buildLoading() {
-    return SafeArea(
-        child: Container(
-      alignment: Alignment.center,
-      child: CircularProgressIndicator(color: _indicatorColor),
-    ));
+    return SafeArea(child: LoadingView(indicatorColor: _indicatorColor));
   }
 
   Widget _buildEmpty() {

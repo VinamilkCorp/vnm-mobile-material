@@ -15,6 +15,7 @@ import '../../extension/object.dart';
 import '../styles/color.dart';
 import '../styles/theme_data.dart';
 import 'image.dart';
+import 'loading.dart';
 import 'scaffold.dart';
 import 'text_view.dart';
 
@@ -69,7 +70,7 @@ class VinamilkAppState extends State<VinamilkApp> {
     return FutureBuilder<void>(
         future: _initialAuth(),
         builder: (context, snapshot) {
-          return snapshot.connectionState == ConnectionState.done
+          return Auth().initCompleted
               ? Builder(
                   builder: (context) => MediaQuery(
                       data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
@@ -136,13 +137,7 @@ class VinamilkAppState extends State<VinamilkApp> {
 
   _buildLoading() {
     return Consumer<LoadingNotifier>(builder: (context, loading, _) {
-      return Visibility(
-          visible: loading.isLoading,
-          child: Container(
-            color: Colors.black12.withOpacity(0.1),
-            alignment: Alignment.center,
-            child: CircularProgressIndicator(),
-          ));
+      return Visibility(visible: loading.isLoading, child: LoadingView());
     });
   }
 
