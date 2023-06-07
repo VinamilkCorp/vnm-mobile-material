@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../../styles/color.dart';
+import '../image.dart';
 import 'button.dart';
 
 class VNMIconButton extends ButtonTracking {
-  final IconData icon;
+  final IconData? icon;
+  final String? asset;
   final Color color;
 
   VNMIconButton({
     super.key,
     required super.label,
-    required this.icon,
+    this.icon,
+    this.asset,
     required this.color,
     super.onPressed,
   });
@@ -39,10 +42,29 @@ class VNMIconButton extends ButtonTracking {
         onPressed: onPressed,
       );
 
+  factory VNMIconButton.asset({
+    required String label,
+    required String asset,
+    Function()? onPressed,
+    Color? color,
+  }) =>
+      VNMIconButton(
+        label: label,
+        asset: asset,
+        color: color ?? VNMColor.white(),
+        onPressed: onPressed,
+      );
+
   @override
   Widget build(BuildContext context) {
+    Widget child = SizedBox();
+    if (icon != null)
+      child = Icon(icon, color: color);
+    else if (asset != null) {
+      child = VNMImage(asset!, color: color);
+    }
     return IconButton(
         onPressed: onPressed == null ? null : onPressedWithTracking,
-        icon: Icon(icon, color: color));
+        icon: child);
   }
 }
