@@ -12,6 +12,7 @@ class VNMTextStyle extends TextStyle {
       super.fontSize,
       super.fontWeight,
       super.height,
+      super.letterSpacing,
       super.decoration});
 
   factory VNMTextStyle._root() =>
@@ -219,12 +220,21 @@ class VNMTextStyle extends TextStyle {
   factory VNMTextStyle.pinkBold18() =>
       VTS._s()._copy(size: 18, weight: FW.w600, color: VNMColor.pink());
 
+  factory VNMTextStyle.titleListTile() => VTS
+      ._s()
+      ._copy(size: 14, weight: FW.w600, height: 20 / 14, letterSpacing: 0.1);
+
+  factory VNMTextStyle.subTitleListTile() => VTS
+      ._s()
+      ._copy(size: 14, weight: FW.w400, height: 20 / 14, letterSpacing: 0.1);
+
   VNMTextStyle _copy({
     Color? color,
     double? size,
     FontWeight? weight,
     double? height,
     TextDecoration? decoration,
+    double? letterSpacing,
   }) {
     return VNMTextStyle(
       color: color ?? this.color,
@@ -232,6 +242,7 @@ class VNMTextStyle extends TextStyle {
       fontWeight: weight ?? this.fontWeight,
       height: height ?? this.height,
       decoration: decoration ?? this.decoration,
+      letterSpacing: letterSpacing ?? this.letterSpacing,
     );
   }
 }
