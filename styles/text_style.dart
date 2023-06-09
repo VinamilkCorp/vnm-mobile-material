@@ -72,6 +72,9 @@ class VNMTextStyle extends TextStyle {
 
   factory VNMTextStyle.btnDisable() => VTS._b()._copy(color: VNMColor.hint());
 
+  factory VNMTextStyle.btnInteractive() =>
+      VTS._b()._copy(color: VNMColor.white());
+
   //primary
   factory VNMTextStyle._pr() => VTS._root()._copy(color: VNMColor.primary());
 

@@ -13,7 +13,8 @@ enum ColorButton {
   join,
   spin,
   spinAll,
-  disable
+  disable,
+  interactive
 }
 
 extension _ColorButton on ColorButton {
@@ -26,6 +27,7 @@ extension _ColorButton on ColorButton {
         VNMTextStyle.btnPrimary(),
         VNMTextStyle.btnWhite(),
         VNMTextStyle.btnDisable(),
+        VNMTextStyle.btnInteractive(),
       ][index];
 
   ButtonStyle get buttonStyle => [
@@ -37,6 +39,7 @@ extension _ColorButton on ColorButton {
         VNMButtonStyle.spin(),
         VNMButtonStyle.spinTransparent(),
         VNMButtonStyle.disable(),
+        VNMButtonStyle.interactive(),
       ][index];
 }
 
@@ -126,9 +129,22 @@ class VNMButton extends ButtonTracking {
         rounded: rounded);
   }
 
-  factory VNMButton.warning(String label, {Function()? onPressed}) {
+  factory VNMButton.warning(String label,
+      {Function()? onPressed, bool? rounded}) {
     return VNMButton(
-        label: label, type: ColorButton.warning, onPressed: onPressed);
+        label: label,
+        type: ColorButton.warning,
+        onPressed: onPressed,
+        rounded: rounded);
+  }
+
+  factory VNMButton.interactive(String label,
+      {Function()? onPressed, bool? rounded}) {
+    return VNMButton(
+        label: label,
+        type: ColorButton.interactive,
+        onPressed: onPressed,
+        rounded: rounded);
   }
 
   factory VNMButton.transparent(String label, {Function()? onPressed}) {

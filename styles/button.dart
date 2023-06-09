@@ -29,6 +29,12 @@ class VNMButtonStyle extends ButtonStyle {
     );
   }
 
+  factory VNMButtonStyle.interactive() {
+    return VNMButtonStyle._square()._copy(
+      color: VNMColor.interactive(),
+    );
+  }
+
   factory VNMButtonStyle.primary() {
     return VNMButtonStyle._square()._copy(
       color: VNMColor.primary(),
