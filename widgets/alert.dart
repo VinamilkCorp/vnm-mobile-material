@@ -80,6 +80,10 @@ class Alert {
   }
 
   Future<void> show() async {
+    if (!VNMNavigator().isReady) {
+      await Future.delayed(Duration(milliseconds: 200));
+      return show();
+    }
     if (_isShow) return;
     _isShow = true;
     Future.delayed(Duration(seconds: 5)).then((_) {

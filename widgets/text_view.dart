@@ -311,6 +311,17 @@ class VNMText extends Text {
           overflow: overflow,
           style: VNMTextStyle.primaryMedium16());
 
+  factory VNMText.hint12(String? data,
+          {TextAlign? textAlign,
+          int? maxLines,
+          TextOverflow? overflow,
+          double? height}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.hint12().copyWith(height: height));
+
   factory VNMText.hint14(String? data,
           {TextAlign? textAlign,
           int? maxLines,
