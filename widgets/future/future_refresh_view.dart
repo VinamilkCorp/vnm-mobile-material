@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vinamilk_b2b/vnm/material/widgets/loading.dart';
 
 import '../../../core/notifiers.dart';
 import '../../../extension/change_notifier.dart';
 import '../../../material/styles/color.dart';
 import '../empty_data_view.dart';
+import '../loading.dart';
 
 class FutureRefreshView<T> extends StatefulWidget {
   final String? emptyText;

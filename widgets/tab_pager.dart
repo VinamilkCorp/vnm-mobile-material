@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vinamilk_b2b/vnm/material/styles/color.dart';
-import 'package:vinamilk_b2b/vnm/material/widgets/button/gesture_button.dart';
 
+import '../styles/color.dart';
+import 'button/gesture_button.dart';
 import 'text_view.dart';
 
 class VNMTabPagerView extends StatefulWidget {

@@ -3,12 +3,12 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vinamilk_b2b/vnm/material/widgets/loading.dart';
 
 import '../../core/exception/index.dart';
 import '../../core/global/logger.dart';
 import '../../extension/widget.dart';
 import '../styles/color.dart';
+import 'loading.dart';
 
 class VNMImage extends StatelessWidget {
   final String path;
