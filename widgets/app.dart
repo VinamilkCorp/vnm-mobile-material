@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/exception/exception.dart';
-import '../../core/global/auth.dart';
 import '../../core/global/loader.dart';
 import '../../core/global/localization.dart';
 import '../../core/global/navigator.dart';
@@ -12,6 +11,7 @@ import '../../core/global/route.dart';
 import '../../core/global/tracking.dart';
 import '../../extension/change_notifier.dart';
 import '../../extension/object.dart';
+import '../../feature/auth/auth.dart';
 import '../styles/color.dart';
 import '../styles/theme_data.dart';
 import 'image.dart';
