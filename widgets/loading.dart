@@ -8,7 +8,7 @@ class LoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black12.withOpacity(0.1),
+      color: Colors.transparent,
       alignment: Alignment.center,
       child: CircularProgressIndicator(color: indicatorColor),
     );
