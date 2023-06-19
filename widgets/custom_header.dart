@@ -14,12 +14,14 @@ class CustomHeaderView extends StatefulWidget {
   final Widget Function(BuildContext context, int index)? separatorBuilder;
   final double? paddingTop;
   final ScrollController? controller;
+  final Widget? bottomNavigationBar;
 
   const CustomHeaderView(
       {super.key,
       this.appBar,
       required this.childrenBuilder,
       this.separatorBuilder,
+      this.bottomNavigationBar,
       this.paddingTop,
       this.controller});
 
@@ -71,6 +73,7 @@ class _CustomHeaderState extends State<CustomHeaderView> {
               VNMScaffold(
                   backgroundColor: Colors.transparent,
                   appBar: widget.appBar,
+                  bottomNavigationBar: widget.bottomNavigationBar,
                   body: LayoutBuilder(builder: (context, box) {
                     return RefreshIndicator(
                         child: Container(

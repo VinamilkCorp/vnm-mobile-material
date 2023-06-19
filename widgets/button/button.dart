@@ -50,6 +50,7 @@ class VNMButton extends ButtonTracking {
   final String subLabel;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
+  final BorderSide? side;
 
   const VNMButton(
       {required super.label,
@@ -59,6 +60,7 @@ class VNMButton extends ButtonTracking {
       String? subLabel,
       this.margin,
       this.padding,
+      this.side,
       bool? rounded,
       bool? inBottom})
       : this.type = type ?? ColorButton.primary,
@@ -119,14 +121,17 @@ class VNMButton extends ButtonTracking {
       {Function()? onPressed,
       bool? rounded,
       bool? inBottom,
-      EdgeInsets? margin}) {
+      EdgeInsets? margin,
+      BorderSide? side}) {
     return VNMButton(
-        label: label,
-        type: ColorButton.primary,
-        onPressed: onPressed,
-        inBottom: inBottom,
-        margin: margin,
-        rounded: rounded);
+      label: label,
+      type: ColorButton.primary,
+      onPressed: onPressed,
+      inBottom: inBottom,
+      margin: margin,
+      rounded: rounded,
+      side: side,
+    );
   }
 
   factory VNMButton.warning(String label,
@@ -208,7 +213,10 @@ class VNMButton extends ButtonTracking {
                 margin == null ? EdgeInsets.all(rounded ? 16 : 0) : margin!,
             child: TextButton(
                 onPressed: onPressed == null ? null : onPressedWithTracking,
-                style: style,
+                style: side == null
+                    ? style
+                    : style.copyWith(
+                        side: MaterialStatePropertyAll<BorderSide?>(side)),
                 child: SafeArea(
                     bottom: inBottom && !rounded,
                     top: false,

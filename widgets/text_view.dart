@@ -55,6 +55,14 @@ class VNMText extends Text {
           overflow: overflow,
           style: VNMTextStyle.subTitle12());
 
+  factory VNMText.subTitle17(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.subTitle17());
+
   factory VNMText.subTitle(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
       VNMText(data ?? "",

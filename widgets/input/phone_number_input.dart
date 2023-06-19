@@ -76,22 +76,44 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
 }
 
 class VNPhoneFormatter extends TextInputFormatter {
+  bool? allowFirstZero;
+
+  VNPhoneFormatter({this.allowFirstZero});
+
   String format(String value) {
+    bool allowFirstZero = this.allowFirstZero ?? false;
     List<String> nums =
         value.replaceFirst("+84", "").replaceAll(RegExp(r'[\D]'), '').split("");
     if (nums.isEmpty) return nums.join("");
-    if (nums.first == "0") nums.removeAt(0);
+    if (nums.first != "0" && allowFirstZero) nums.insert(0, "0");
+    if (nums.first == "0" && !allowFirstZero) nums.removeAt(0);
 
     if (nums.isEmpty) return nums.join("");
-    if (nums.length > 3 && nums[3] != " ") {
-      nums.insert(3, " ");
+
+    if (allowFirstZero) {
+      if (nums.length > 4 && nums[4] != " ") {
+        nums.insert(4, " ");
+      }
+      if (nums.length > 8 && nums[8] != " ") {
+        nums.insert(8, " ");
+      }
+    } else {
+      if (nums.length > 3 && nums[3] != " ") {
+        nums.insert(3, " ");
+      }
+      if (nums.length > 7 && nums[7] != " ") {
+        nums.insert(7, " ");
+      }
     }
-    if (nums.length > 7 && nums[7] != " ") {
-      nums.insert(7, " ");
-    }
-    return nums
-        .getRange(0, min(nums.length, 12 - (nums.first == "9" ? 1 : 0)))
-        .join("");
+
+    return allowFirstZero
+        ? nums
+            .getRange(0,
+                min(nums.length, 13 - (nums.join("").startsWith("09") ? 1 : 0)))
+            .join("")
+        : nums
+            .getRange(0, min(nums.length, 12 - (nums.first == "9" ? 1 : 0)))
+            .join("");
   }
 
   @override

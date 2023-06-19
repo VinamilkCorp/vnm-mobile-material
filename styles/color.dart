@@ -79,6 +79,8 @@ class VNMColor extends Color {
 
   factory VNMColor.border() => C(C(0xffE5E5EA).value);
 
+  factory VNMColor.textFieldBorder() => C(C(0xffD1D1D6).value);
+
   factory VNMColor.success() => C(C(0xff34C759).value);
 
   MaterialColor get material => MaterialColor(VNMColor.primary().value, {

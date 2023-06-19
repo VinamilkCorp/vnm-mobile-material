@@ -15,6 +15,7 @@ class FutureRefreshListView<T> extends StatelessWidget {
   final Widget Function(BuildContext context, int index, T data)?
       separatorBuilder;
   final EdgeInsets? padding;
+  final EdgeInsets? listViewPadding;
   final bool? primary;
   final bool? shrinkWrap;
 
@@ -30,6 +31,7 @@ class FutureRefreshListView<T> extends StatelessWidget {
       this.separatorBuilder,
       this.loadingItems,
       this.padding,
+      this.listViewPadding,
       this.primary,
       this.shrinkWrap});
 
@@ -43,6 +45,7 @@ class FutureRefreshListView<T> extends StatelessWidget {
         return Padding(
           padding: padding ?? EdgeInsets.zero,
           child: ListView.separated(
+              padding: listViewPadding,
               primary: primary ?? true,
               shrinkWrap: shrinkWrap ?? false,
               itemBuilder: (context, index) =>
