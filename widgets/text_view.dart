@@ -380,4 +380,12 @@ class VNMText extends Text {
           maxLines: maxLines,
           overflow: overflow,
           style: VNMTextStyle.subTitleListTile());
+
+  factory VNMText.error17(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.error17());
 }

@@ -181,6 +181,8 @@ class VNMTextStyle extends TextStyle {
 
   factory VNMTextStyle.error16() => VTS._error()._copy(size: 16);
 
+  factory VNMTextStyle.error17() => VTS._error()._copy(size: 17);
+
   //subtitle
   factory VNMTextStyle._stl() => VTS._s()._copy(color: VNMColor.subTitle());
 
