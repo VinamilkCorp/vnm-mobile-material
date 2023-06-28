@@ -2,9 +2,9 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:vinamilk_sfa/vnm/core/notifiers.dart';
-import 'package:vinamilk_sfa/vnm/extension/change_notifier.dart';
 
+import '../../../core/notifiers.dart';
+import '../../../extension/change_notifier.dart';
 import '../../styles/color.dart';
 import '../../styles/text_style.dart';
 import '../text_view.dart';

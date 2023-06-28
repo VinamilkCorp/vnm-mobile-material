@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vinamilk_sfa/vnm/material/styles/color.dart';
-import 'package:vinamilk_sfa/vnm/material/widgets/text_view.dart';
+
+import '../../styles/color.dart';
+import '../text_view.dart';
 
 class VNMBottomDialog extends StatelessWidget {
   final String? title;
