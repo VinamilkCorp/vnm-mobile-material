@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vinamilk_b2b/vnm/extension/if_null.dart';
 
 import '../../../core/global/tracking.dart';
+import '../../../extension/if_null.dart';
 import '../../styles/button.dart';
 import '../../styles/text_style.dart';
 import '../text_view.dart';

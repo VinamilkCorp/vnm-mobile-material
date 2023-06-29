@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vinamilk_b2b/vnm/core/global/logger.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../../core/global/logger.dart';
 
 class VNMWebView extends StatelessWidget {
   final String htmlString;
