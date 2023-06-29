@@ -33,6 +33,8 @@ class VNMColor extends Color {
 
   factory VNMColor.error() => C(0xffFF3B30);
 
+  factory VNMColor.red() => C(0XFFFF3B30);
+
   factory VNMColor.hint() => C(0xff8E8E93);
 
   factory VNMColor.note() => C(0xff525B86);

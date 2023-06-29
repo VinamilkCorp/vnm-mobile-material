@@ -52,10 +52,6 @@ class VNMButtonStyle extends ButtonStyle {
     return VNMButtonStyle._square()._copy(color: VNMColor.white());
   }
 
-  factory VNMButtonStyle.join() {
-    return VNMButtonStyle._stadium()._copy(color: VNMColor.orange());
-  }
-
   factory VNMButtonStyle.spin() {
     return VNMButtonStyle._stadium()
         ._copy(color: VNMColor.fortuneWheelArrow(), padding: EdgeInsets.all(6));

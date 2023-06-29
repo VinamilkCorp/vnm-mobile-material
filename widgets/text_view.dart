@@ -7,6 +7,22 @@ class VNMText extends Text {
       {super.style, super.textAlign, super.maxLines, super.overflow})
       : super(data ?? "");
 
+  VNMText copyWith({
+    String? data,
+    TextStyle? style,
+    TextAlign? textAlign,
+    int? maxLines,
+    TextOverflow? overflow,
+  }) {
+    return VNMText(
+      data ?? this.data,
+      style: style ?? this.style,
+      textAlign: textAlign ?? this.textAlign,
+      maxLines: maxLines ?? this.maxLines,
+      overflow: overflow ?? this.overflow,
+    );
+  }
+
   factory VNMText.error(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
       VNMText(data ?? "",
@@ -388,4 +404,12 @@ class VNMText extends Text {
           maxLines: maxLines,
           overflow: overflow,
           style: VNMTextStyle.error17());
+}
+
+extension TitleText on VNMText {
+  VNMText get title => copyWith(style: style?.title);
+}
+
+extension BodyText on VNMText {
+  VNMText get body => copyWith(style: style?.body);
 }

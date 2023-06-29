@@ -253,3 +253,11 @@ class VNMTextStyle extends TextStyle {
     );
   }
 }
+
+extension TextStyleTypo on TextStyle {
+  TextStyle get title =>
+      copyWith(height: 1.5, fontWeight: FontWeight.w600, letterSpacing: 0.15);
+
+  TextStyle get body =>
+      copyWith(height: 1.3, fontWeight: FontWeight.w400, letterSpacing: 0.2);
+}

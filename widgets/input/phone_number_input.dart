@@ -107,13 +107,8 @@ class VNPhoneFormatter extends TextInputFormatter {
     }
 
     return allowFirstZero
-        ? nums
-            .getRange(0,
-                min(nums.length, 13 - (nums.join("").startsWith("09") ? 1 : 0)))
-            .join("")
-        : nums
-            .getRange(0, min(nums.length, 12 - (nums.first == "9" ? 1 : 0)))
-            .join("");
+        ? nums.getRange(0, min(nums.length, 12)).join("")
+        : nums.getRange(0, min(nums.length, 11)).join("");
   }
 
   @override
