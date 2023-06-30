@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 
+import '../../core/global/loader.dart';
 import '../../core/global/localization.dart';
 import '../../core/global/navigator.dart';
 import 'button/text_button.dart';
@@ -81,14 +82,15 @@ class Alert {
 
   Future<void> show() async {
     if (!VNMNavigator().isReady) {
-      await Future.delayed(Duration(milliseconds: 200));
+      await Future.delayed(const Duration(milliseconds: 200));
       return show();
     }
     if (_isShow) return;
     _isShow = true;
-    Future.delayed(Duration(seconds: 5)).then((_) {
+    Future.delayed(const Duration(seconds: 5)).then((_) {
       _isShow = false;
     });
+    Loader().hide();
     await Dialogs.materialDialog(
         title: title,
         msg: message,
