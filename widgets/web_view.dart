@@ -22,7 +22,8 @@ class VNMWebView extends StatelessWidget {
         padding: padding,
         child: WebViewWidget(
             controller: WebViewController()
-              ..loadHtmlString(htmlString)
+              ..loadHtmlString(
+                  htmlString.isEmpty ? "<html></html>" : htmlString)
               ..setNavigationDelegate(NavigationDelegate(
                   onWebResourceError: (WebResourceError error) {
                     VNMLogger().error(error.description);
