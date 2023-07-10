@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:vinamilk_b2b/material/exception/dio_exception.dart';
 
 import '../../auth/auth.dart';
 import '../../core/env.dart';
@@ -53,9 +52,9 @@ class VNMException {
         await Alert.close(message: locale.no_internet_connection).show();
       } else if (exception is MessageException) {
         String? message;
-        if (exception is UnknownMessageException) {
-          message = exception.detail;
-        }
+        // if (exception is UnknownMessageException) {
+        //   message = exception.detail;
+        // }
         message ??= exception.message(VNMNavigator().context);
         await Storage().setString("exception", message);
         await Alert.close(message: message).show();
