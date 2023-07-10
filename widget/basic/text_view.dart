@@ -311,6 +311,14 @@ class VNMText extends Text {
           overflow: overflow,
           style: VNMTextStyle.whiteBold11());
 
+  factory VNMText.message(String? data,
+          {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
+      VNMText(data ?? "",
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: overflow,
+          style: VNMTextStyle.message());
+
   factory VNMText.message16(String? data,
           {TextAlign? textAlign, int? maxLines, TextOverflow? overflow}) =>
       VNMText(data ?? "",

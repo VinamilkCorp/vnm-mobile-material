@@ -133,6 +133,8 @@ class VNMTextStyle extends TextStyle {
   //message
   factory VNMTextStyle._msg() => VTS._root()._copy(color: VNMColor.message());
 
+  factory VNMTextStyle.message() => VTS._msg();
+
   factory VNMTextStyle.message16() => VTS._msg()._copy(size: 16);
 
   //background
