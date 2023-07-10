@@ -3,23 +3,23 @@ import 'package:provider/provider.dart';
 
 import '../../../core/notifiers.dart';
 import '../../../extension/change_notifier.dart';
-import '../../../material/styles/color.dart';
-import '../empty_data_view.dart';
-import '../loading.dart';
+import '../../style/color.dart';
+import '../basic/empty_data_view.dart';
+import '../basic/loading.dart';
 
-class FutureRefreshView<T> extends StatefulWidget {
+class StreamRefreshView<T> extends StatefulWidget {
   final String? emptyText;
   final String? emptyTitle;
-  final Future<T?> Function() future;
+  final Stream<T?> Function() stream;
   final Color? backgroundColor;
   final Color? indicatorColor;
-  final Widget Function(BuildContext context)? headerBuilder;
+  final Widget Function(BuildContext context, T? data)? headerBuilder;
   final Widget Function(BuildContext context, T data) builder;
   final Widget Function(BuildContext context)? loadingBuilder;
 
-  const FutureRefreshView(
+  const StreamRefreshView(
       {super.key,
-      required this.future,
+      required this.stream,
       required this.builder,
       this.headerBuilder,
       this.loadingBuilder,
@@ -29,10 +29,10 @@ class FutureRefreshView<T> extends StatefulWidget {
       this.indicatorColor});
 
   @override
-  _FutureRefreshViewState<T> createState() => _FutureRefreshViewState<T>();
+  _StreamRefreshViewState<T> createState() => _StreamRefreshViewState<T>();
 }
 
-class _FutureRefreshViewState<T> extends State<FutureRefreshView<T>> {
+class _StreamRefreshViewState<T> extends State<StreamRefreshView<T>> {
   final TickNotifier refresher = TickNotifier();
 
   String get _emptyTitle => widget.emptyTitle ?? "";
@@ -53,9 +53,9 @@ class _FutureRefreshViewState<T> extends State<FutureRefreshView<T>> {
           return Consumer<TickNotifier>(
             builder: (context, notifier, _) {
               var valueKey = notifier.value;
-              return FutureBuilder<T?>(
+              return StreamBuilder<T?>(
                   key: ValueKey(valueKey),
-                  future: widget.future(),
+                  stream: widget.stream(),
                   builder: (context, snap) {
                     if (snap.connectionState == ConnectionState.waiting) {
                       if (widget.loadingBuilder != null)
@@ -98,7 +98,7 @@ class _FutureRefreshViewState<T> extends State<FutureRefreshView<T>> {
 
     return Column(
       children: [
-        if (widget.headerBuilder != null) widget.headerBuilder!(context),
+        if (widget.headerBuilder != null) widget.headerBuilder!(context, data),
         Expanded(
             child: RefreshIndicator(
           onRefresh: () async => refresher.change(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../styles/app_bar_theme.dart';
-import '../styles/color.dart';
+import '../../style/app_bar_theme.dart';
+import '../../style/color.dart';
 import 'text_view.dart';
 
 class VNMAppBar extends AppBar {

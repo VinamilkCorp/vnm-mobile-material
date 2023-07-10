@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../core/global/tracking.dart';
 import '../../../extension/if_null.dart';
-import '../../styles/button.dart';
-import '../../styles/text_style.dart';
-import '../text_view.dart';
+import '../../style/button.dart';
+import '../../style/text_style.dart';
+import '../basic/text_view.dart';
 
 extension VNMButtonStyleEx on VNMButton {
   VNMButton get primary => copyWith(

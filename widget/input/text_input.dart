@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 
 import '../../../core/notifiers.dart';
 import '../../../extension/change_notifier.dart';
-import '../../styles/color.dart';
-import '../../styles/text_style.dart';
-import '../text_view.dart';
+import '../../style/color.dart';
+import '../../style/text_style.dart';
+import '../basic/text_view.dart';
 
 class TextInputValid {
   final bool Function(String text) onValid;

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../../core/env.dart';
 import '../../../extension/state.dart';
-import '../text_view.dart';
+import '../basic/text_view.dart';
 
 class PhoneNumberInput extends StatefulWidget {
   final TextEditingController controller;

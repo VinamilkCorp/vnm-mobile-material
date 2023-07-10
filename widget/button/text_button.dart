@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../styles/button.dart';
-import '../../styles/text_style.dart';
-import '../text_view.dart';
+import '../../style/button.dart';
+import '../../style/text_style.dart';
+import '../basic/text_view.dart';
 import 'button.dart';
 
 enum VNMTextButtonType { _default, hint, white, primary, cancel, interactive }

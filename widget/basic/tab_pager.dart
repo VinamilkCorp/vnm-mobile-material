@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../styles/color.dart';
-import 'button/gesture_button.dart';
+import '../../style/color.dart';
+import '../button/gesture_button.dart';
 import 'text_view.dart';
 
 class VNMTabPagerView extends StatefulWidget {

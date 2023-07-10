@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../styles/text_style.dart';
+import '../../style/text_style.dart';
 
 class VNMText extends Text {
   VNMText(String? data,

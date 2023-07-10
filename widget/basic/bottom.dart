@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../styles/color.dart';
+import '../../style/color.dart';
 
 class BottomView extends StatelessWidget {
   final EdgeInsets? padding;

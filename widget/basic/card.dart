@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../styles/color.dart';
+import '../../style/color.dart';
 
 class VNMCardView extends StatelessWidget {
   final Widget child;

@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/notifiers.dart';
-import '../../extension/change_notifier.dart';
-import '../../material/styles/color.dart';
-import '../../material/widgets/scaffold.dart';
+import '../../../core/notifiers.dart';
+import '../../../extension/change_notifier.dart';
+import '../../style/color.dart';
+import 'scaffold.dart';
 
 class CustomHeaderView extends StatefulWidget {
   final PreferredSizeWidget? appBar;

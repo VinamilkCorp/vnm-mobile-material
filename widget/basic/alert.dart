@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 
-import '../../core/global/loader.dart';
-import '../../core/global/localization.dart';
-import '../../core/global/navigator.dart';
-import 'button/text_button.dart';
+import '../../../core/global/loader.dart';
+import '../../../core/global/localization.dart';
+import '../../../core/global/navigator.dart';
+import '../button/text_button.dart';
 
 enum AlertStyle { cancel, ok }
 

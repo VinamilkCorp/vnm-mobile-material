@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../styles/color.dart';
+import '../../style/color.dart';
 
 class LoadingView extends StatelessWidget {
   final Color? indicatorColor;

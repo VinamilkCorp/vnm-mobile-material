@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../core/global/logger.dart';
+import '../../../core/global/logger.dart';
 
 class VNMWebView extends StatelessWidget {
   final String htmlString;

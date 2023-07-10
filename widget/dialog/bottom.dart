@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../styles/color.dart';
-import '../text_view.dart';
+import '../../style/color.dart';
+import '../basic/text_view.dart';
 
 class VNMBottomDialog extends StatelessWidget {
   final String? title;
