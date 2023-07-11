@@ -3,12 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:vinamilk_sfa/core/notifiers.dart';
-import 'package:vinamilk_sfa/extension/change_notifier.dart';
-import 'package:vinamilk_sfa/material/style/color.dart';
+import '../../../extension/change_notifier.dart';
 
 import '../../../core/env.dart';
+import '../../../core/notifiers.dart';
 import '../../../extension/state.dart';
+import '../../style/color.dart';
 import '../basic/text_view.dart';
 
 class PhoneNumberInput extends StatefulWidget {
