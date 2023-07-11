@@ -192,6 +192,8 @@ class VNMTextStyle extends TextStyle {
 
   factory VNMTextStyle.subTitle14() => VTS._stl();
 
+  factory VNMTextStyle.subTitle16() => VTS._stl()._copy(size: 16);
+
   factory VNMTextStyle.subTitle17() => VTS._stl()._copy(size: 17);
 
   factory VNMTextStyle._stlBold() => VNMTextStyle._stl()._copy(weight: FW.w600);

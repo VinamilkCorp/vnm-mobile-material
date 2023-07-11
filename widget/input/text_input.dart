@@ -91,13 +91,16 @@ class _VNMTextInputState extends State<VNMTextInput> {
             decoration: InputDecoration(
               label: Consumer<BoolNotifier>(
                 builder: (context, focus, _) {
-                  return focus.isTrue || controller.text.isNotEmpty
-                      ? (invalid.value == null
-                          ? VNMText.subTitle17(widget.labelText)
-                          : VNMText.error17(widget.labelText))
-                      : (invalid.value == null
-                          ? VNMText.hint14(widget.hintText ?? widget.labelText)
-                          : VNMText.error(widget.labelText));
+                  return controller.text.isEmpty && focus.isFalse
+                      ? VNMText.hint14(widget.labelText)
+                      : (focus.isTrue || controller.text.isNotEmpty
+                          ? (invalid.value == null
+                              ? VNMText.subTitle17(widget.labelText)
+                              : VNMText.error17(widget.labelText))
+                          : (invalid.value == null
+                              ? VNMText.hint14(
+                                  widget.hintText ?? widget.labelText)
+                              : VNMText.error(widget.labelText)));
                 },
               ),
               errorText: invalid.value,

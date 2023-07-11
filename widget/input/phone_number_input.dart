@@ -2,6 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:vinamilk_sfa/core/notifiers.dart';
+import 'package:vinamilk_sfa/extension/change_notifier.dart';
+import 'package:vinamilk_sfa/material/style/color.dart';
 
 import '../../../core/env.dart';
 import '../../../extension/state.dart';
@@ -18,48 +22,98 @@ class PhoneNumberInput extends StatefulWidget {
   State<StatefulWidget> createState() => _PhoneNumberInputState();
 }
 
-class _PhoneNumberInputState extends State<PhoneNumberInput> {
+class _PhoneNumberInputState extends State<PhoneNumberInput>
+    with TickerProviderStateMixin {
   final RegExp validRegExp = RegExp(r'(^(?:[+0]9)?[0-9]{9,10}$)');
   final FocusNode focusNode = FocusNode();
+  late final AnimationController animation;
+  final BoolNotifier _focus = BoolNotifier();
+
+  Duration get duration => const Duration(milliseconds: 300);
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     widget.controller.text = VNPhoneFormatter().format(widget.controller.text);
+    animation = AnimationController(vsync: this, duration: duration);
+    focusNode.addListener(() {
+      _focus.setValue(focusNode.hasFocus);
+    });
+    if (widget.enabled == true) {
+      focusNode.requestFocus();
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        animation.forward();
+      });
+    } else {
+      animation.value = 1;
+    }
+  }
+
+  @override
+  void dispose() {
+    animation.dispose();
+    widget.controller.dispose();
+    focusNode.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        VNMText(locale.phone_number),
-        Stack(
-          alignment: Alignment.centerLeft,
-          children: [
-            TextFormField(
-              focusNode: focusNode,
-              keyboardType: TextInputType.phone,
-              autofocus: false,
-              enabled: widget.enabled,
-              validator: _validate,
-              controller: widget.controller,
-              inputFormatters: [VNPhoneFormatter()],
-              decoration: InputDecoration(
-                  prefixIconConstraints:
-                      BoxConstraints(minWidth: 0, minHeight: 0),
-                  prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
-                    Image.asset('icons/flags/png/vn.png',
-                        package: 'country_icons', height: 20),
-                    Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 6),
-                        child: VNMText('+${Env().VN_COUNTRY_CODE}'))
-                  ])),
-            ),
-          ],
-        ),
-      ],
+    return MultiProvider(
+      providers: [_focus.create<BoolNotifier>()],
+      builder: (context, child) {
+        return ScaleTransition(
+          scale: CurvedAnimation(curve: Curves.ease, parent: animation),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              VNMText(locale.phone_number),
+              const SizedBox(height: 8),
+              Consumer<BoolNotifier>(
+                builder: (context, focus, child) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    decoration: ShapeDecoration(
+                      shape: StadiumBorder(
+                          side: BorderSide(
+                              color: focus.value == true
+                                  ? VNMColor.textFieldBorder()
+                                  : Colors.transparent)),
+                      color: VNMColor.border(),
+                    ),
+                    child: child,
+                  );
+                },
+                child: _buildTextField(),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildTextField() {
+    return TextFormField(
+      focusNode: focusNode,
+      keyboardType: TextInputType.phone,
+      autofocus: false,
+      enabled: widget.enabled,
+      validator: _validate,
+      controller: widget.controller,
+      inputFormatters: [VNPhoneFormatter()],
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          prefixIconConstraints:
+              const BoxConstraints(minWidth: 0, minHeight: 0),
+          prefixIcon: Row(mainAxisSize: MainAxisSize.min, children: [
+            Image.asset('icons/flags/png/vn.png',
+                package: 'country_icons', height: 20),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6),
+                child: VNMText('+${Env().VN_COUNTRY_CODE}'))
+          ])),
     );
   }
 
