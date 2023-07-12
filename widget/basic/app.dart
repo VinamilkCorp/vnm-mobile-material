@@ -10,6 +10,7 @@ import '../../../core/global/navigator.dart';
 import '../../../core/global/network.dart';
 import '../../../core/global/route.dart';
 import '../../../core/global/tracking.dart';
+import '../../../core/util/version.dart';
 import '../../../extension/change_notifier.dart';
 import '../../../extension/object.dart';
 import '../../exception/exception.dart';
@@ -44,6 +45,17 @@ class VinamilkAppState extends BaseAppState<VinamilkApp> {
         Auth().notifier.create<AuthNotifier>(),
         Network().notifier.create<NetworkNotifier>(),
       ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Future.delayed(Duration(seconds: 1)).then((value) {
+        Version().showRequiredUpgradeAlert();
+      });
+    });
+  }
 
   @override
   Future<void> onReady() async {

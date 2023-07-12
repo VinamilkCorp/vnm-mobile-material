@@ -3,16 +3,50 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../extension/change_notifier.dart';
 
 import '../../../core/env.dart';
 import '../../../core/notifiers.dart';
+import '../../../extension/change_notifier.dart';
 import '../../../extension/state.dart';
+import '../../../material/widget/basic/alert.dart';
 import '../../style/color.dart';
 import '../basic/text_view.dart';
 
-class PhoneNumberInput extends StatefulWidget {
+class PhoneNumberController {
   final TextEditingController controller;
+  String? errorMessage;
+
+  set text(String value) => this.controller.text = value;
+
+  String get text => this.controller.text;
+
+  bool onValid() {
+    final RegExp validRegExp = RegExp(r'(^(?:[+0]9)?[0-9]{9,10}$)');
+    var unformatted = text.replaceAll(" ", "");
+    if (unformatted.isEmpty) return false;
+    if (!validRegExp.hasMatch(unformatted)) {
+      return false;
+    }
+    return true;
+  }
+
+  PhoneNumberController({String? text, String? errorMessage})
+      : this.errorMessage = errorMessage,
+        this.controller = TextEditingController(text: text);
+
+  void dispose() {
+    this.controller.dispose();
+  }
+
+  bool valid() {
+    bool isValid = onValid();
+    if (!isValid) Alert.close(message: errorMessage).show();
+    return isValid;
+  }
+}
+
+class PhoneNumberInput extends StatefulWidget {
+  final PhoneNumberController controller;
   final bool enabled;
 
   PhoneNumberInput({Key? key, required this.controller, this.enabled = true})
@@ -24,10 +58,10 @@ class PhoneNumberInput extends StatefulWidget {
 
 class _PhoneNumberInputState extends State<PhoneNumberInput>
     with TickerProviderStateMixin {
-  final RegExp validRegExp = RegExp(r'(^(?:[+0]9)?[0-9]{9,10}$)');
-  final FocusNode focusNode = FocusNode();
   late final AnimationController animation;
-  final BoolNotifier _focus = BoolNotifier();
+  final FocusNode focusNode = FocusNode();
+  final BoolNotifier focus = BoolNotifier();
+  final StringNotifier invalid = StringNotifier();
 
   Duration get duration => const Duration(milliseconds: 300);
 
@@ -37,8 +71,16 @@ class _PhoneNumberInputState extends State<PhoneNumberInput>
     super.initState();
     widget.controller.text = VNPhoneFormatter().format(widget.controller.text);
     animation = AnimationController(vsync: this, duration: duration);
+    focus.value = false;
     focusNode.addListener(() {
-      _focus.setValue(focusNode.hasFocus);
+      focus.setValue(focusNode.hasFocus);
+      String? message;
+      if (!focusNode.hasFocus) {
+        message = widget.controller.onValid() == false
+            ? widget.controller.errorMessage
+            : null;
+      }
+      invalid.setValue(message);
     });
     if (widget.enabled == true) {
       focusNode.requestFocus();
@@ -61,7 +103,10 @@ class _PhoneNumberInputState extends State<PhoneNumberInput>
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [_focus.create<BoolNotifier>()],
+      providers: [
+        focus.create<BoolNotifier>(),
+        invalid.create<StringNotifier>()
+      ],
       builder: (context, child) {
         return ScaleTransition(
           scale: CurvedAnimation(curve: Curves.ease, parent: animation),
@@ -72,17 +117,33 @@ class _PhoneNumberInputState extends State<PhoneNumberInput>
               const SizedBox(height: 8),
               Consumer<BoolNotifier>(
                 builder: (context, focus, child) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    decoration: ShapeDecoration(
-                      shape: StadiumBorder(
-                          side: BorderSide(
-                              color: focus.value == true
-                                  ? VNMColor.textFieldBorder()
-                                  : Colors.transparent)),
-                      color: VNMColor.border(),
-                    ),
-                    child: child,
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: ShapeDecoration(
+                          shape: StadiumBorder(
+                              side: BorderSide(
+                                  color: focus.value == true
+                                      ? VNMColor.textFieldBorder()
+                                      : Colors.transparent)),
+                          color: VNMColor.border(),
+                        ),
+                        child: child,
+                      ),
+                      Consumer<StringNotifier>(builder: (context, invalid, _) {
+                        return AnimatedOpacity(
+                            opacity: invalid.value == null ? 0 : 1,
+                            duration: Duration(milliseconds: 200),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16)
+                                      .copyWith(top: 8),
+                              child: VNMText.error(invalid.value),
+                            ));
+                      })
+                    ],
                   );
                 },
                 child: _buildTextField(),
@@ -95,13 +156,11 @@ class _PhoneNumberInputState extends State<PhoneNumberInput>
   }
 
   Widget _buildTextField() {
-    return TextFormField(
+    return TextField(
       focusNode: focusNode,
       keyboardType: TextInputType.phone,
-      autofocus: false,
       enabled: widget.enabled,
-      validator: _validate,
-      controller: widget.controller,
+      controller: widget.controller.controller,
       inputFormatters: [VNPhoneFormatter()],
       decoration: InputDecoration(
           border: InputBorder.none,
@@ -115,17 +174,6 @@ class _PhoneNumberInputState extends State<PhoneNumberInput>
                 child: VNMText('+${Env().VN_COUNTRY_CODE}'))
           ])),
     );
-  }
-
-  String? _validate(String? value) {
-    if (!widget.enabled) return null;
-    var unformatted = (value ?? '').replaceAll(" ", "");
-    if (unformatted.isEmpty) return locale.validate_required_field;
-    if (!validRegExp.hasMatch(unformatted)) {
-      return locale.phone_number_invalid;
-    }
-    return null;
-    // return  Localization().locale.phone_number_invalid;
   }
 }
 
